@@ -1,5 +1,7 @@
 package com.LeafandLoaf.data;
 
+import com.LeafandLoaf.models.Order;
+
 // This class manages the flow of ordering
 public class OrderDataManager {
 
@@ -13,6 +15,29 @@ public class OrderDataManager {
     }
 
     // Method to add a sandwich
-    public
+    public void addSandwich() {
+        // TODO: Add sandwich flow logic
+        return;
+    }
+
+    // Method to add a drink
+    public void addDrink() {
+        // TODO: Add drink logic
+        return;
+    }
+
+    // Method to add chips
+    public void addChips(){
+        // TODO: Add chip logic
+
+        return;
+    }
+
+    //Method to check out
+    public void checkout() {
+        // TODO: Add checkout logic
+        return;
+    }
+
 
 }
