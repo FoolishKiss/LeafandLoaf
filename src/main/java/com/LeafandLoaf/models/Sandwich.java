@@ -60,18 +60,22 @@ public class Sandwich {
             case TWELVE: basePrice = 8.50; break;
         }
 
+        // For debugging to check if base price is correct
         System.out.println("Base Price: $" + basePrice);
 
+        // Loops through toppings price and adds to base price
         for (Topping t: toppings) {
             double toppingPrice = t.getPrice(size);
+            // Fro debugging logs the price of the topping
             System.out.println("Adding " + t + " | Price: $" + toppingPrice);
             basePrice += t.getPrice(size);
         }
 
+        // Returns final price of sandwich with toppings
         return basePrice;
     }
 
-    //Method to get label of size
+    //Method to get label of size by converting the values into string
     public String getSizeLabel() {
         switch (size) {
             case FOUR: return "4 inch";
@@ -84,7 +88,7 @@ public class Sandwich {
     // Format the sandwich is printed in
     @Override
     public String toString() {
-        return "Sandwich: " + getSizeLabel() + " on " + bread + " sandwich" + (toasted ? " (toasted)" : "");
+        return getSizeLabel() + " on " + bread + " sandwich" + (toasted ? " (toasted)" : "");
     }
 
 

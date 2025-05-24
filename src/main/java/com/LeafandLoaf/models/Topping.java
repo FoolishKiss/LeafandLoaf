@@ -43,12 +43,6 @@ public class Topping {
         isExtra = extra;
     }
 
-    @Override
-    public String toString() {
-        return name + (isExtra ? " (extra)" : "");
-    }
-
-
     // Method to get price
     public double getPrice(Size size) {
 
@@ -72,7 +66,7 @@ public class Topping {
         }
 
         // Price of premium cheese
-        if (type == CHEESE) {
+        else if (type == CHEESE) {
             switch (size) {
                 case FOUR: price = 0.75; break;
                 case EIGHT: price = 1.50; break;
@@ -88,6 +82,11 @@ public class Topping {
         }
 
         return price;
+    }
+
+    @Override
+    public String toString() {
+        return name + (isExtra ? " (extra)" : "");
     }
 
 

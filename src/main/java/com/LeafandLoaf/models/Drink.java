@@ -4,16 +4,18 @@ import com.LeafandLoaf.models.enums.DrinkSize;
 
 public class Drink {
 
+    // Properties of a drink order
     private DrinkSize drinkSize;
     private String flavor;
 
 
-
+    // Constructor
     public Drink(DrinkSize drinkSize, String flavor) {
         this.drinkSize = drinkSize;
         this.flavor = flavor;
     }
 
+    // Getters and setters
     public DrinkSize getDrinkSize() {
         return drinkSize;
     }
@@ -41,6 +43,7 @@ public class Drink {
         }
     }
 
+    // To format the drink order
     @Override
     public String toString() {
         return drinkSize + " " + flavor;

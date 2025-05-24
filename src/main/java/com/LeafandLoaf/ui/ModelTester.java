@@ -1,11 +1,13 @@
 package com.LeafandLoaf.ui;
 
-import com.LeafandLoaf.models.Sandwich;
-import com.LeafandLoaf.models.Topping;
+import com.LeafandLoaf.models.*;
 import com.LeafandLoaf.models.enums.BreadType;
+import com.LeafandLoaf.models.enums.DrinkSize;
 import com.LeafandLoaf.models.enums.Size;
 import com.LeafandLoaf.models.enums.ToppingType;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Arrays;
 
 public class ModelTester {
@@ -24,14 +26,24 @@ public class ModelTester {
                 Arrays.asList(veganBacon, cheddar, jalapenos)
         );
 
+        // Create drink
+        Drink lemonade = new Drink(DrinkSize.MEDIUM, "Lemonade");
 
-        //Calculate price
-        System.out.println(mySandwich);
-        System.out.println("Price: " + mySandwich.calculatePrice());
+        // Create chips
+        Chip bbqChips = new Chip("BBQ");
 
-        // View topping costs
-        System.out.println("Vegan Bacon price: $" + veganBacon.getPrice(Size.EIGHT));
-        System.out.println("Cheddar (extra) price: $" + cheddar.getPrice(Size.EIGHT));
+        // Create order
+        Order order = new Order(1, LocalDate.now(), LocalTime.now());
+
+        // Add items to order
+        order.getSandwiches().add(mySandwich);
+        order.getDrinks().add(lemonade);
+        order.getChips().add(bbqChips);
+
+        // Printout the receipt
+        System.out.println(order.summary());
+
+
     }
 
 }
