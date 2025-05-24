@@ -24,5 +24,48 @@ public class Order {
         this.time = time;
     }
 
+    // Method to get total price of the entire order
+    public double getTotal() {
+        double total = 0.0;
+
+        // Add sandwich prices
+        for (Sandwich s : sandwiches) {
+            total += s.calculatePrice();
+        }
+
+        // Add drink prices
+        for (Drink d : drinks) {
+            total += d.getPrice();
+        }
+
+        // Add chip prices
+        for (Chip c : chips) {
+            total += c.getPrice();
+        }
+        return total;
+    }
+
+    // Method to return order summary
+    public String summary(){
+
+        StringBuilder order = new StringBuilder();
+        order.append("Order Summary: \n");
+
+        for (Sandwich s : sandwiches) {
+            order.append("- Sandwich: ").append(s.toString()).append("\n");
+        }
+
+        for (Drink d : drinks) {
+            order.append("- Drink: ").append(d.toString()).append("\n");
+        }
+
+        for (Chip c : chips) {
+            order.append("- Chip: ").append(c.toString()).append("\n");
+        }
+        order.append("Total: $").append(getTotal());
+
+        return order.toString();
+    }
+
 
 }

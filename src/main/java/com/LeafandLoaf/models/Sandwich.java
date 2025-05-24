@@ -19,12 +19,9 @@ public class Sandwich {
         this.size = size;
         this.bread = bread;
         this.toasted = toasted;
-        this.toppings = new ArrayList<>();
+        this.toppings = toppings;
     }
 
-    public Sandwich() {
-
-    }
 
     public Size getSize() {
         return size;
@@ -50,6 +47,8 @@ public class Sandwich {
         this.toasted = toasted;
     }
 
+
+
     // Method to calculate sandwich price
     public double calculatePrice() {
         double basePrice = 0.0;
@@ -61,7 +60,11 @@ public class Sandwich {
             case TWELVE: basePrice = 8.50; break;
         }
 
+        System.out.println("Base Price: $" + basePrice);
+
         for (Topping t: toppings) {
+            double toppingPrice = t.getPrice(size);
+            System.out.println("Adding " + t + " | Price: $" + toppingPrice);
             basePrice += t.getPrice(size);
         }
 

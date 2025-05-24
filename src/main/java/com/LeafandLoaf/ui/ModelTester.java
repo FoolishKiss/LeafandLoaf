@@ -26,7 +26,7 @@ public class ModelTester {
 
 
         //Calculate price
-        System.out.println("Sandwich: " + mySandwich);
+        System.out.println(mySandwich);
         System.out.println("Price: " + mySandwich.calculatePrice());
 
         // View topping costs

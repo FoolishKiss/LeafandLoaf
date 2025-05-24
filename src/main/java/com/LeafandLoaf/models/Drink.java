@@ -4,23 +4,22 @@ import com.LeafandLoaf.models.enums.DrinkSize;
 
 public class Drink {
 
-    private String DrinkSize;
+    private DrinkSize drinkSize;
     private String flavor;
-    private double price;
 
 
-    public Drink(double price, String flavor, String drinkSize) {
-        this.price = price;
+
+    public Drink(DrinkSize drinkSize, String flavor) {
+        this.drinkSize = drinkSize;
         this.flavor = flavor;
-        DrinkSize = drinkSize;
     }
 
-    public String getDrinkSize() {
-        return DrinkSize;
+    public DrinkSize getDrinkSize() {
+        return drinkSize;
     }
 
-    public void setDrinkSize(String drinkSize) {
-        DrinkSize = drinkSize;
+    public void setDrinkSize(DrinkSize drinkSize) {
+        this.drinkSize = drinkSize;
     }
 
     public String getFlavor() {
@@ -31,11 +30,20 @@ public class Drink {
         this.flavor = flavor;
     }
 
+
+    // Method to get price of drink based on size
     public double getPrice() {
-        return price;
+        switch (drinkSize) {
+            case SMALL: return 2.00;
+            case MEDIUM: return 2.50;
+            case LARGE: return 3.00;
+            default: return 0.0;
+        }
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    @Override
+    public String toString() {
+        return drinkSize + " " + flavor;
     }
+
 }

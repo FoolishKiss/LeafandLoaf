@@ -72,7 +72,7 @@ public class Topping {
         }
 
         // Price of premium cheese
-        if (type == ToppingType.CHEESE) {
+        if (type == CHEESE) {
             switch (size) {
                 case FOUR: price = 0.75; break;
                 case EIGHT: price = 1.50; break;
