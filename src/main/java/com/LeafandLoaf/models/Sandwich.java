@@ -21,4 +21,68 @@ public class Sandwich {
         this.toasted = toasted;
         this.toppings = new ArrayList<>();
     }
+
+    public Sandwich() {
+
+    }
+
+    public Size getSize() {
+        return size;
+    }
+
+    public void setSize(Size size) {
+        this.size = size;
+    }
+
+    public BreadType getBread() {
+        return bread;
+    }
+
+    public void setBread(BreadType bread) {
+        this.bread = bread;
+    }
+
+    public boolean isToasted() {
+        return toasted;
+    }
+
+    public void setToasted(boolean toasted) {
+        this.toasted = toasted;
+    }
+
+    // Method to calculate sandwich price
+    public double calculatePrice() {
+        double basePrice = 0.0;
+
+        // Determine base price based on size
+        switch (size) {
+            case FOUR: basePrice = 5.50; break;
+            case EIGHT: basePrice = 7.00; break;
+            case TWELVE: basePrice = 8.50; break;
+        }
+
+        for (Topping t: toppings) {
+            basePrice += t.getPrice(size);
+        }
+
+        return basePrice;
+    }
+
+    //Method to get label of size
+    public String getSizeLabel() {
+        switch (size) {
+            case FOUR: return "4 inch";
+            case EIGHT: return "8 inch";
+            case TWELVE: return "12 inch";
+            default: return "";
+        }
+    }
+
+    // Format the sandwich is printed in
+    @Override
+    public String toString() {
+        return "Sandwich: " + getSizeLabel() + " on " + bread + " sandwich" + (toasted ? " (toasted)" : "");
+    }
+
+
 }
