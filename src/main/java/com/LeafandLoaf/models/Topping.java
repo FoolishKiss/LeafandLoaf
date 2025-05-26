@@ -3,6 +3,8 @@ package com.LeafandLoaf.models;
 import com.LeafandLoaf.models.enums.Size;
 import com.LeafandLoaf.models.enums.ToppingType;
 
+import java.util.List;
+
 import static com.LeafandLoaf.models.enums.ToppingType.CHEESE;
 
 public class Topping {
@@ -42,6 +44,24 @@ public class Topping {
     public void setExtra(boolean extra) {
         isExtra = extra;
     }
+
+    public static final List<Topping> MENU = List.of(
+            new Topping("Tofu Ham", ToppingType.ALTMEAT,false),
+            new Topping("Roasted chickpeas", ToppingType.ALTMEAT,false),
+            new Topping("Vegan Turkey", ToppingType.ALTMEAT,true),
+            new Topping("Tofu Strips", ToppingType.ALTMEAT,true),
+            new Topping("Vegan Bacon", ToppingType.ALTMEAT,true),
+            new Topping("Lettuce", ToppingType.REGULAR,false),
+            new Topping("Jalapenos", ToppingType.REGULAR,false),
+            new Topping("Tomato", ToppingType.REGULAR,false),
+            new Topping("Cucumber", ToppingType.REGULAR,false),
+            new Topping("Bell peppers", ToppingType.REGULAR,false),
+            new Topping("Mushrooms", ToppingType.REGULAR,false),
+            new Topping("Mustard", ToppingType.SAUCE,false),
+            new Topping("Mayo", ToppingType.SAUCE,false),
+            new Topping("Pepper Jack", ToppingType.CHEESE,false),
+            new Topping("Cheddar", ToppingType.CHEESE,false)
+    );
 
     // Method to get price
     public double getPrice(Size size) {
