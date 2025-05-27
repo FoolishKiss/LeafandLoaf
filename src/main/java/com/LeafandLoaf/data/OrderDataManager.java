@@ -5,6 +5,7 @@ import com.LeafandLoaf.models.enums.BreadType;
 import com.LeafandLoaf.models.enums.DrinkSize;
 import com.LeafandLoaf.models.enums.Size;
 import com.LeafandLoaf.models.enums.ToppingType;
+import com.LeafandLoaf.util.InputHelper;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -113,11 +114,9 @@ public class OrderDataManager {
         System.out.println("1) 4 inch ($5.50)");
         System.out.println("2) 8 inch ($7.00)");
         System.out.println("3) 12 inch ($8.50)");
-        System.out.println("Enter choice: ");
 
-        // Stores user choice as int
-        int sizeChoice = userinput.nextInt();
-        userinput.nextLine();
+        // Stores user choice as int using inputHelper
+        int sizeChoice = InputHelper.getInt("Enter Choice: ");
 
         // Coverts user number to Size enum defaults to 8 inch
         Size size = switch (sizeChoice) {
@@ -134,11 +133,9 @@ public class OrderDataManager {
         System.out.println("2) Wheat");
         System.out.println("3) Rye");
         System.out.println("4) Wrap");
-        System.out.println("Enter choice: ");
 
-        // Stores user choice as int
-        int breadChoice = userinput.nextInt();
-        userinput.nextLine();
+        // Stores user choice as int using inputHelper
+        int breadChoice = InputHelper.getInt("Enter Choice: ");
 
         // Coverts user number to BreadType enum defaults to wheat
         BreadType bread = switch (breadChoice) {
@@ -151,8 +148,7 @@ public class OrderDataManager {
         };
 
         // Ask user if they want the sandwich toasted
-        System.out.println("Do you want it toasted (y/n): ");
-        boolean toasted = userinput.nextLine().trim().equalsIgnoreCase("y");
+        boolean toasted = InputHelper.confirm("Do you want it toasted? ");
 
         // Add the toppings
         List<Topping> toppings = new ArrayList<>();
@@ -170,13 +166,11 @@ public class OrderDataManager {
             System.out.println("0) Done");
 
             // Reads and stores user choice as int
-            int choice = userinput.nextInt();
-            userinput.nextLine();
+            int choice = InputHelper.getInt("Enter topping number: ");
 
             // Breaks loop if user picks 0
-            if (choice == 0) {
-                addingToppings =  false; break;
-            }
+            if (choice == 0) break;
+
 
             // If the users choice is below 1 or above the size of the list
             // Its invalid
@@ -188,19 +182,17 @@ public class OrderDataManager {
             // Gets chosen toppings and stores them in selected variable
             Topping selected = Topping.MENU.get(choice - 1);
 
-            // set is extra to false
+            // Set is extra to false
             boolean isExtra = false;
 
-            // If cheese or alt meat ask user if they want extra
+            // If premium cheese or alt meat ask user if they want extra
             if (selected.getType() == ToppingType.ALTMEAT || selected.getType() == ToppingType.CHEESE) {
-                System.out.println("Do you want extra " + selected.getName() + "? (y/n): ");
-                isExtra = userinput.nextLine().trim().equalsIgnoreCase("y");
+                isExtra = InputHelper.confirm("Do you want extra " + selected.getName() + "?");
 
             }
 
-            // Add toppings to list with extra
+            // Add toppings to list with extra and print out topping
             Topping finalTopping = new Topping(selected.getName(), selected.getType(), isExtra);
-
             toppings.add(finalTopping);
             System.out.println("Added: " + finalTopping);
 
@@ -211,10 +203,6 @@ public class OrderDataManager {
         currentOrder.getSandwiches().add(sandwich);
         System.out.println("Sandwich added: " + sandwich);
         System.out.println("Price: $" + sandwich.calculatePrice());
-
-
-
-
     }
 
     // Method to add a drink
@@ -228,11 +216,9 @@ public class OrderDataManager {
         System.out.println("1) Small ($2.00)");
         System.out.println("2) Medium ($2.50)");
         System.out.println("3) Large ($3.00)");
-        System.out.println("Enter size:");
 
         // Stores user choice as int
-        int sizeChoice = userinput.nextInt();
-        userinput.nextLine();
+        int sizeChoice = InputHelper.getInt("Enter size: ");
 
         // Coverts user number to DrinkSize enum defaults to Medium
         DrinkSize size = switch (sizeChoice) {
@@ -249,14 +235,12 @@ public class OrderDataManager {
                 .forEach(System.out::println);
 
         // Ask user to choose a drink
-        System.out.println("Enter drink number: ");
-        int drinkChoice = userinput.nextInt();
-        userinput.nextLine();
+        int drinkChoice = InputHelper.getInt("Enter drink number: ");
 
         // Checks if user choice is greater than or equal to 1 and less then or equal to the drink menu
     String flavor = (drinkChoice >= 1 && drinkChoice <= Drink.MENU.size())
             // If the input is valid subtract 1 otherwise default to lemonade
-            ? Drink.MENU.get(drinkChoice - 1) : "Invalid drink. Defaulting to Lemonade.";
+            ? Drink.MENU.get(drinkChoice - 1) : "Lemonade";
 
     // If the input is invalid it prints out this message
     if (drinkChoice < 1 || drinkChoice > Drink.MENU.size()) {
