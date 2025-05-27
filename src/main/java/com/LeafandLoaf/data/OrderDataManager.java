@@ -1,9 +1,11 @@
 package com.LeafandLoaf.data;
 
+import com.LeafandLoaf.models.Drink;
 import com.LeafandLoaf.models.Order;
 import com.LeafandLoaf.models.Sandwich;
 import com.LeafandLoaf.models.Topping;
 import com.LeafandLoaf.models.enums.BreadType;
+import com.LeafandLoaf.models.enums.DrinkSize;
 import com.LeafandLoaf.models.enums.Size;
 import com.LeafandLoaf.models.enums.ToppingType;
 
@@ -220,8 +222,58 @@ public class OrderDataManager {
 
     // Method to add a drink
     public void addDrink() {
-        // TODO: Add drink logic
-        return;
+
+        // Ask user if they want to add a drik
+        System.out.println("\nAdd a drink to your order");
+
+        // Choose size
+        System.out.println("Choose a size:");
+        System.out.println("1) Small ($2.00)");
+        System.out.println("2) Medium ($2.50)");
+        System.out.println("3) Large ($3.00)");
+        System.out.println("Enter size:");
+
+        // Stores user choice as int
+        int sizeChoice = userinput.nextInt();
+        userinput.nextLine();
+
+        // Coverts user number to DrinkSize enum defaults to Medium
+        DrinkSize size = switch (sizeChoice) {
+            case 1 -> DrinkSize.SMALL;
+            case 2 -> DrinkSize.MEDIUM;
+            case 3 -> DrinkSize.LARGE;
+            default -> DrinkSize.MEDIUM;
+        };
+
+        // Displays drink menu
+        System.out.println("Choose a drink:");
+        Drink.MENU.stream()
+                .map(d -> (Drink.MENU.indexOf(d) + 1) + ") " +d)
+                .forEach(System.out::println);
+
+        // Ask user to choose a drink
+        System.out.println("Enter drink number: ");
+        int drinkChoice = userinput.nextInt();
+        userinput.nextLine();
+
+        // Checks if user choice is greater than or equal to 1 and less then or equal to the drink menu
+    String flavor = (drinkChoice >= 1 && drinkChoice <= Drink.MENU.size())
+            // If the input is valid subtract 1 otherwise default to lemonade
+            ? Drink.MENU.get(drinkChoice - 1) : "Lemonade";
+
+    // If the input is invalid it prints out this message
+    if (drinkChoice < 1 || drinkChoice > Drink.MENU.size()) {
+        System.out.println("Invalid drink. Defaulting to Lemonade.");
+    }
+
+    // Create and add drink to order
+    Drink drink = new Drink(size, flavor);
+    currentOrder.getDrinks().add(drink);
+
+    // Display drink and cost
+    System.out.println("Drink added: " + drink);
+    System.out.println("Price: $" + drink.getPrice());
+
     }
 
     // Method to add chips
