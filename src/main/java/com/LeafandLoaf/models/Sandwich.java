@@ -60,14 +60,11 @@ public class Sandwich {
             case TWELVE: basePrice = 8.50; break;
         }
 
-        // For debugging to check if base price is correct
-        System.out.println("Base Price: $" + basePrice);
+
 
         // Loops through toppings price and adds to base price
         for (Topping t: toppings) {
             double toppingPrice = t.getPrice(size);
-            // For debugging logs the price of the topping
-            System.out.println("Adding " + t + " | Price: $" + toppingPrice);
             basePrice += t.getPrice(size);
         }
 

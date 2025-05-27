@@ -292,7 +292,7 @@ public class OrderDataManager {
 
         String chipType = (chipChoice >= 1 && chipChoice <= Chip.MENU.size())
                 // If the input is valid subtract 1 otherwise default to lemonade
-                ? Chip.MENU.get(chipChoice - 1) : "BBQ";
+                ? Chip.MENU.get(chipChoice - 1) : "";
 
         // If the input is invalid it prints out this message
         if (chipChoice < 1 || chipChoice > Drink.MENU.size()) {
@@ -313,8 +313,14 @@ public class OrderDataManager {
 
     //Method to check out
     public void checkout() {
-        // TODO: Add checkout logic
-        return;
+        System.out.println("\nFinal Order Summary:");
+        System.out.println(currentOrder.summary());
+
+        // Save to file
+        ReceiptWriter.write(currentOrder);
+
+        // Print order complete
+        System.out.println("Order complete.");
     }
 
 
