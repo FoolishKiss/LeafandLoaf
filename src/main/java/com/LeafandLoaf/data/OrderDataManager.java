@@ -1,9 +1,6 @@
 package com.LeafandLoaf.data;
 
-import com.LeafandLoaf.models.Drink;
-import com.LeafandLoaf.models.Order;
-import com.LeafandLoaf.models.Sandwich;
-import com.LeafandLoaf.models.Topping;
+import com.LeafandLoaf.models.*;
 import com.LeafandLoaf.models.enums.BreadType;
 import com.LeafandLoaf.models.enums.DrinkSize;
 import com.LeafandLoaf.models.enums.Size;
@@ -259,7 +256,7 @@ public class OrderDataManager {
         // Checks if user choice is greater than or equal to 1 and less then or equal to the drink menu
     String flavor = (drinkChoice >= 1 && drinkChoice <= Drink.MENU.size())
             // If the input is valid subtract 1 otherwise default to lemonade
-            ? Drink.MENU.get(drinkChoice - 1) : "Lemonade";
+            ? Drink.MENU.get(drinkChoice - 1) : "Invalid drink. Defaulting to Lemonade.";
 
     // If the input is invalid it prints out this message
     if (drinkChoice < 1 || drinkChoice > Drink.MENU.size()) {
@@ -278,9 +275,40 @@ public class OrderDataManager {
 
     // Method to add chips
     public void addChips(){
-        // TODO: Add chip logic
 
-        return;
+        // Ask user if they want to add chips
+        System.out.println("\nAdd chips to your order");
+
+        // Display the menu using stream
+        Chip.MENU.stream()
+                .map(chip -> (Chip.MENU.indexOf(chip) + 1) + ") " + chip)
+                .forEach(System.out::println);
+        System.out.println("0) Cancel");
+
+        // Ask user to pick a chip
+        System.out.println("Enter chip number: ");
+        int chipChoice = userinput.nextInt();
+        userinput.nextLine();
+
+        String chipType = (chipChoice >= 1 && chipChoice <= Chip.MENU.size())
+                // If the input is valid subtract 1 otherwise default to lemonade
+                ? Chip.MENU.get(chipChoice - 1) : "BBQ";
+
+        // If the input is invalid it prints out this message
+        if (chipChoice < 1 || chipChoice > Drink.MENU.size()) {
+            System.out.println("Invalid chip. No chips added");
+        }
+
+        // Create and add chips to order
+        Chip chips = new Chip(chipType);
+        currentOrder.getChips().add(chips);
+
+        // Display drink and cost
+        System.out.println("Chips added: " + chips);
+        System.out.println("Price: $" + chips.getPrice());
+
+
+
     }
 
     //Method to check out

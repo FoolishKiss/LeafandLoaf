@@ -1,5 +1,7 @@
 package com.LeafandLoaf.models;
 
+import java.util.List;
+
 public class Chip {
 
     private String type;
@@ -20,6 +22,9 @@ public class Chip {
     public double getPrice() {
         return price;
     }
+
+    public static final List<String> MENU = List.of("BBQ", "Sea Salt", "Sour Cream & Onion",
+            "Salt & Vinegar", "Jalapeno");
 
     @Override
     public String toString() {
