@@ -6,6 +6,7 @@ import com.LeafandLoaf.models.enums.DrinkSize;
 import com.LeafandLoaf.models.enums.Size;
 import com.LeafandLoaf.models.enums.ToppingType;
 import com.LeafandLoaf.util.InputHelper;
+import com.LeafandLoaf.util.UIHelper;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -17,7 +18,6 @@ import java.util.Scanner;
 public class OrderDataManager {
 
     // Holds the current order the user is making
-    private Scanner userinput = new Scanner(System.in);
     private Order currentOrder;
     private int orderId = 1;
 
@@ -29,9 +29,11 @@ public class OrderDataManager {
 
         // Start loop
         while (running) {
-            System.out.println("\nWelcome to Leaf and Loaf\n");
+            UIHelper.heading("Welcome to Leaf and Loaf");
+            UIHelper.divider();
             System.out.println("1) Start New Order");
             System.out.println("2) Exit");
+            UIHelper.divider();
 
 
             // Gets the users number input
@@ -39,12 +41,12 @@ public class OrderDataManager {
 
             // Switch based off users input calls createNewOrder method or exit app
             switch (choice) {
-                case 1: createNewOrder(); break;
-                case 2: System.out.println("Thank you. GoodBye!");
+                case 1: UIHelper.showSpinner(1); createNewOrder(); break;
+                case 2: UIHelper.success("Thank you. GoodBye!");
                     running = false; break;
                 // If user types anything besides 1 or 2 print message
                 default:
-                    System.out.println("Invalid option. Try again.");
+                    UIHelper.warning("Invalid option. Try again.");
             }
 
         }
@@ -54,6 +56,10 @@ public class OrderDataManager {
     // Method the start a new order
     private void createNewOrder() {
 
+        // Banner
+        UIHelper.banner("\nStarting a New Order\n");
+
+
         // Creates a new order
         currentOrder = new Order(orderId, LocalDate.now(), LocalTime.now());
 
@@ -62,41 +68,52 @@ public class OrderDataManager {
 
         // Starts order menu loop
         while (ordering) {
-            System.out.println("\nOrder Menu:\n");
+
+            // Heading
+            UIHelper.divider();
+            UIHelper.heading("Order Menu");
+
             System.out.println("1) Add Sandwich");
             System.out.println("2) Add Drink");
             System.out.println("3) Add Chips");
             System.out.println("4) View Order Receipt");
             System.out.println("5) Checkout");
-            System.out.println("0 ) Cancel Order");
+            System.out.println("0) Cancel Order");
+
+            UIHelper.divider();
 
 
             // Gets the users number input using InputHelper
-            int input = InputHelper.getInt("Choose an option: ");
+            int input = InputHelper.getInt(UIHelper.YELLOW + "Choose an option: " + UIHelper.RESET);
 
             switch (input) {
                 case 1:
+                    UIHelper.typeText("Opening sandwich builder...", 20);
                     addSandwich();
                     break;
                 case 2:
+                    UIHelper.typeText("Adding a drink...", 20);
                     addDrink();
                     break;
                 case 3:
+                    UIHelper.typeText("Adding chips...", 20);
                     addChips();
                     break;
                 case 4:
+                    UIHelper.heading("Current Order Receipt");
                     System.out.println(currentOrder.summary());
                     break;
                 case 5:
+                    UIHelper.typeText("Checking out...", 20);
                     checkout();
                     ordering = false;
                     break;
                 case 0:
-                    System.out.println("Order canceled.");
+                    UIHelper.error("Order canceled.");
                     ordering = false;
                     break;
                 default:
-                    System.out.println("Invalid option.");
+                    UIHelper.warning("Invalid option. Try again.");
             }
         }
     }
@@ -105,16 +122,18 @@ public class OrderDataManager {
     public void addSandwich() {
 
         // Lets user know that they started the sandwich process
-        System.out.println("\nBuilding your sandwich...");
+        UIHelper.heading("Building your sandwich...");
+
 
         // Ask user for size choice
+        UIHelper.divider();
         System.out.println("\nChoose a size:");
         System.out.println("1) 4 inch ($5.50)");
         System.out.println("2) 8 inch ($7.00)");
         System.out.println("3) 12 inch ($8.50)");
 
         // Stores user choice as int using inputHelper
-        int sizeChoice = InputHelper.getInt("Enter Choice: ");
+        int sizeChoice = InputHelper.getInt(UIHelper.YELLOW + "Enter size choice:" + UIHelper.RESET);
 
         // Coverts user number to Size enum defaults to 8 inch
         Size size = switch (sizeChoice) {
@@ -126,6 +145,7 @@ public class OrderDataManager {
         };
 
         // Ask user for bread choice
+        UIHelper.divider();
         System.out.println("\nChoose bread:");
         System.out.println("1) White");
         System.out.println("2) Wheat");
@@ -133,7 +153,7 @@ public class OrderDataManager {
         System.out.println("4) Wrap");
 
         // Stores user choice as int using inputHelper
-        int breadChoice = InputHelper.getInt("Enter Choice: ");
+        int breadChoice = InputHelper.getInt(UIHelper.YELLOW + "Enter bread choice: " + UIHelper.RESET);
 
         // Coverts user number to BreadType enum defaults to wheat
         BreadType bread = switch (breadChoice) {
@@ -146,6 +166,7 @@ public class OrderDataManager {
         };
 
         // Ask user if they want the sandwich toasted
+        UIHelper.divider();
         boolean toasted = InputHelper.confirm("Do you want it toasted? ");
 
         // Add the toppings
@@ -164,7 +185,7 @@ public class OrderDataManager {
             System.out.println("0) Done");
 
             // Reads and stores user choice as int
-            int choice = InputHelper.getInt("Enter topping number: ");
+            int choice = InputHelper.getInt(UIHelper.YELLOW + "Enter topping number: " + UIHelper.RESET);
 
             // Breaks loop if user picks 0
             if (choice == 0) break;
@@ -173,7 +194,7 @@ public class OrderDataManager {
             // If the users choice is below 1 or above the size of the list
             // Its invalid
             if (choice < 1 || choice > Topping.MENU.size()) {
-                System.out.println("Invalid choice.");
+                UIHelper.warning("Invalid choice.");
                 continue;
             }
 
@@ -191,30 +212,32 @@ public class OrderDataManager {
             // Add toppings to list with extra and print out topping
             Topping finalTopping = new Topping(selected.getName(), selected.getType(), isExtra);
             toppings.add(finalTopping);
-            System.out.println("Added: " + finalTopping);
+            UIHelper.success("Added: " + finalTopping);
         }
 
         // Makes the sandwich and adds to order
         Sandwich sandwich = new Sandwich(size, bread, toasted, toppings);
         currentOrder.getSandwiches().add(sandwich);
-        System.out.println("Sandwich added: " + sandwich);
-        System.out.println("Price: $" + sandwich.calculatePrice());
+        UIHelper.divider();
+        UIHelper.typeText("Sandwich added: " + sandwich, 20);
+        UIHelper.typeText("Price: $" + sandwich.calculatePrice(),20);
     }
 
     // Method to add a drink
     public void addDrink() {
 
-        // Ask user if they want to add a drik
-        System.out.println("\nAdd a drink to your order");
+        // Ask user if they want to add a drink
+        UIHelper.heading("Add a drink to your order");
 
         // Choose size
+        UIHelper.divider();
         System.out.println("Choose a size:");
         System.out.println("1) Small ($2.00)");
         System.out.println("2) Medium ($2.50)");
         System.out.println("3) Large ($3.00)");
 
         // Stores user choice as int
-        int sizeChoice = InputHelper.getInt("Enter size: ");
+        int sizeChoice = InputHelper.getInt(UIHelper.YELLOW + "Enter size: " + UIHelper.RESET);
 
         // Coverts user number to DrinkSize enum defaults to Medium
         DrinkSize size = switch (sizeChoice) {
@@ -225,13 +248,14 @@ public class OrderDataManager {
         };
 
         // Displays drink menu
+        UIHelper.divider();
         System.out.println("Choose a drink:");
         Drink.MENU.stream()
                 .map(d -> (Drink.MENU.indexOf(d) + 1) + ") " +d)
                 .forEach(System.out::println);
 
         // Ask user to choose a drink
-        int drinkChoice = InputHelper.getInt("Enter drink number: ");
+        int drinkChoice = InputHelper.getInt(UIHelper.YELLOW + "Enter drink number: " + UIHelper.RESET);
 
         // Checks if user choice is greater than or equal to 1 and less then or equal to the drink menu
     String flavor = (drinkChoice >= 1 && drinkChoice <= Drink.MENU.size())
@@ -240,7 +264,7 @@ public class OrderDataManager {
 
     // If the input is invalid it prints out this message
     if (drinkChoice < 1 || drinkChoice > Drink.MENU.size()) {
-        System.out.println("Invalid drink. Defaulting to Lemonade.");
+        UIHelper.warning("Invalid drink. Defaulting to Lemonade.");
     }
 
     // Create and add drink to order
@@ -248,8 +272,9 @@ public class OrderDataManager {
     currentOrder.getDrinks().add(drink);
 
     // Display drink and cost
-    System.out.println("Drink added: " + drink);
-    System.out.println("Price: $" + drink.getPrice());
+    UIHelper.divider();
+    UIHelper.typeText("Drink added: " + drink,20);
+    UIHelper.typeText("Price: $" + drink.getPrice(),20);
 
     }
 
@@ -257,20 +282,21 @@ public class OrderDataManager {
     public void addChips(){
 
         // Ask user if they want to add chips
-        System.out.println("\nAdd chips to your order");
+        UIHelper.heading("Add chips to your order");
 
         // Display the menu using stream
+        UIHelper.divider();
         Chip.MENU.stream()
                 .map(chip -> (Chip.MENU.indexOf(chip) + 1) + ") " + chip)
                 .forEach(System.out::println);
         System.out.println("0) Cancel");
 
         // Ask user to pick a chip
-        int chipChoice = InputHelper.getInt("Enter chip number: ");
+        int chipChoice = InputHelper.getInt(UIHelper.YELLOW + "Enter chip number: " + UIHelper.RESET);
 
         // Cancel if user enters 0
         if (chipChoice == 0) {
-            System.out.println("Chip selection cancelled.");
+            UIHelper.warning("Chip selection cancelled.");
             return;
         }
 
@@ -281,7 +307,7 @@ public class OrderDataManager {
 
         // If the input is invalid it prints out this message
         if (chipType == null) {
-            System.out.println("Invalid choice. No chips added");
+            UIHelper.warning("Invalid choice. No chips added");
         }
 
         // Create and add chips to order
@@ -289,20 +315,25 @@ public class OrderDataManager {
         currentOrder.getChips().add(chips);
 
         // Display drink and cost
-        System.out.println("Chips added: " + chips);
-        System.out.println("Price: $" + chips.getPrice());
+        UIHelper.divider();
+        UIHelper.typeText("Chips added: " + chips, 20);
+        UIHelper.typeText("Price: $" + chips.getPrice(), 20);
     }
 
     //Method to check out
     public void checkout() {
-        System.out.println("\nFinal Order Summary:");
-        System.out.println(currentOrder.summary());
+        UIHelper.heading("Final Order Summary:");
+
+        UIHelper.typeText(currentOrder.summary(), 15);
+
+        UIHelper.divider();
 
         // Save to file
+        UIHelper.showSpinner(2);
         ReceiptWriter.write(currentOrder);
 
         // Print order complete
-        System.out.println("Order complete.");
+        UIHelper.success("Order complete.");
     }
 
 

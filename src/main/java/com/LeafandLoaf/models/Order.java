@@ -101,9 +101,11 @@ public class Order {
     // Method to return order summary
     public String summary(){
 
+
+
         // String builder to hold receipt
         StringBuilder order = new StringBuilder();
-        order.append("\nOrder Summary: \n");
+        order.append("Order Summary: \n");
 
         // Loops through each sandwich and prints out the formated line
         for (Sandwich s : sandwiches) {

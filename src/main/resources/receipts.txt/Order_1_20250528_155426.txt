@@ -1,0 +1,5 @@
+Order Summary: 
+- Drink: MEDIUM Lemonade
+- Chip: Jalapeno Chips
+Total: $4.0
+Thank you for dining at Leaf & Loaf.
