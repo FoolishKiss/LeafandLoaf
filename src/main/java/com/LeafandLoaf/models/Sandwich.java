@@ -80,7 +80,7 @@ public class Sandwich {
             case FOUR: return "4 inch";
             case EIGHT: return "8 inch";
             case TWELVE: return "12 inch";
-            default: return "";
+            default: return "8 inch";
         }
     }
 
