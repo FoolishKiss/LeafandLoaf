@@ -10,19 +10,20 @@ public class InputHelper {
     // Method to print out questions to user,
     // take in response and returns the full input as string
     public static String getString(String question) {
-        System.out.println(question);
+        System.out.println(UIHelper.YELLOW + question + UIHelper.RESET + " ");
         return userInput.nextLine();
     }
 
     // Method to print out questions to user,
     // take in response and returns the full input as int
     public static int getInt(String question) {
-        System.out.println(question);
+        System.out.println(UIHelper.YELLOW + question + UIHelper.RESET + " ");
 
         // If the  user input is not a number it loops
         // shows an error message and asks again
         while (!userInput.hasNextInt()) {
-            System.out.println("Invalid input. " + question);
+            UIHelper.warning("Invalid Input. Please enter a number.");
+            System.out.println(UIHelper.YELLOW + question + UIHelper.RESET);
 
             // Deletes the invalid input
             userInput.next();
