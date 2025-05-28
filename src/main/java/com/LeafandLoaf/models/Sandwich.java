@@ -14,7 +14,7 @@ public class Sandwich {
     protected boolean toasted;
     protected List<Topping> toppings;
 
-    //Constructor
+    // Constructor
     public Sandwich(Size size, BreadType bread, boolean toasted, List<Topping> toppings) {
         this.size = size;
         this.bread = bread;
@@ -60,15 +60,14 @@ public class Sandwich {
             case TWELVE: basePrice = 8.50; break;
         }
 
-        // For debugging to check if base price is correct
-        System.out.println("Base Price: $" + basePrice);
-
         // Loops through toppings price and adds to base price
         for (Topping t: toppings) {
             double toppingPrice = t.getPrice(size);
+
             // For debugging logs the price of the topping
             System.out.println("Adding " + t + " | Price: $" + toppingPrice);
-            basePrice += t.getPrice(size);
+            basePrice += toppingPrice;
+
         }
 
         // Returns final price of sandwich with toppings

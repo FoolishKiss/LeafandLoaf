@@ -3,6 +3,8 @@ package com.LeafandLoaf.models;
 import com.LeafandLoaf.models.enums.Size;
 import com.LeafandLoaf.models.enums.ToppingType;
 
+import java.util.List;
+
 import static com.LeafandLoaf.models.enums.ToppingType.CHEESE;
 
 public class Topping {
@@ -43,6 +45,29 @@ public class Topping {
         isExtra = extra;
     }
 
+    public static final List<Topping> MENU = List.of(
+            new Topping("Tofu Ham", ToppingType.ALTMEAT,false),
+            new Topping("Roasted Humus Spread", ToppingType.ALTMEAT,false),
+            new Topping("Vegan Turkey", ToppingType.ALTMEAT,true),
+            new Topping("Tofu Strips", ToppingType.ALTMEAT,true),
+            new Topping("Vegan Bacon", ToppingType.ALTMEAT,true),
+            new Topping("Spinach", ToppingType.REGULAR,false),
+            new Topping("Jalapenos", ToppingType.REGULAR,false),
+            new Topping("Tomato", ToppingType.REGULAR,false),
+            new Topping("Cucumber", ToppingType.REGULAR,false),
+            new Topping("Bell peppers", ToppingType.REGULAR,false),
+            new Topping("Guacamole", ToppingType.REGULAR,false),
+            new Topping("Mushrooms", ToppingType.REGULAR,false),
+            new Topping("Mustard", ToppingType.SAUCE,false),
+            new Topping("Vegan Mayo", ToppingType.SAUCE,false),
+            new Topping("Vegan Ranch", ToppingType.SAUCE,false),
+            new Topping("Vegan Thousand Island", ToppingType.SAUCE,false),
+            new Topping("Pepper Jack", ToppingType.CHEESE,false),
+            new Topping("American", ToppingType.CHEESE,false),
+            new Topping("Cheddar", ToppingType.CHEESE,false),
+            new Topping("Swiss", ToppingType.CHEESE,false)
+    );
+
     // Method to get price
     public double getPrice(Size size) {
 
@@ -66,7 +91,7 @@ public class Topping {
         }
 
         // Price of premium cheese
-        else if (type == CHEESE) {
+        else if (type == ToppingType.CHEESE) {
             switch (size) {
                 case FOUR: price = 0.75; break;
                 case EIGHT: price = 1.50; break;
@@ -81,6 +106,7 @@ public class Topping {
             }
         }
 
+        // Returns the price of the alt meat and cheese
         return price;
     }
 

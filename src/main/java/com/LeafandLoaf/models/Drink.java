@@ -2,6 +2,8 @@ package com.LeafandLoaf.models;
 
 import com.LeafandLoaf.models.enums.DrinkSize;
 
+import java.util.List;
+
 public class Drink {
 
     // Properties of a drink order
@@ -42,6 +44,9 @@ public class Drink {
             default: return 0.0;
         }
     }
+
+    // Drink Menu
+    public static final List<String> MENU = List.of("Lemonade", "Sweet Tea", "Orange Juice", "Sprite", "Root Beer");
 
     // To format the drink order
     @Override
