@@ -3,12 +3,12 @@ package com.LeafandLoaf.util;
 public class UIHelper {
 
     // ANSI color codes
-    public static final String RESET = "\u001B[0m";
-    public static final String RED = "\u001B[31m";
-    public static final String GREEN = "\u001B[32m";
-    public static final String YELLOW = "\u001B[33m";
-    public static final String BLUE = "\u001B[34m";
-    public static final String CYAN = "\u001B[36m";
+    public static final String RESET = "\u001B[0m"; // Reset text back to default
+    public static final String RED = "\u001B[31m"; // For error messages
+    public static final String GREEN = "\u001B[32m"; // For successful confirmation
+    public static final String YELLOW = "\u001B[33m"; // For warnings or prompts
+    public static final String BLUE = "\u001B[34m"; // For headings
+    
 
 
 
@@ -82,7 +82,7 @@ public class UIHelper {
         System.out.printf("%" + (padding + text.length()) + "s\n", text);
     }
 
-    //
+    // Method to a color to a string
     public static void printColor(String message, String color) {
         System.out.println(color + message + RESET);
     }
@@ -102,10 +102,6 @@ public class UIHelper {
         printColor(message, RED);
     }
 
-    // Info message
-    public static void info(String message) {
-        printColor(message, CYAN);
-    }
 
     // Banner title message
     public static void banner(String title) {
