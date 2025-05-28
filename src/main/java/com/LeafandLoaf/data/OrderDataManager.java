@@ -71,7 +71,7 @@ public class OrderDataManager {
             System.out.println("0 ) Cancel Order");
 
 
-            // Gets the users number input
+            // Gets the users number input using InputHelper
             int input = InputHelper.getInt("Choose an option: ");
 
             switch (input) {
@@ -186,14 +186,12 @@ public class OrderDataManager {
             // If premium cheese or alt meat ask user if they want extra
             if (selected.getType() == ToppingType.ALTMEAT || selected.getType() == ToppingType.CHEESE) {
                 isExtra = InputHelper.confirm("Do you want extra " + selected.getName() + "?");
-
             }
 
             // Add toppings to list with extra and print out topping
             Topping finalTopping = new Topping(selected.getName(), selected.getType(), isExtra);
             toppings.add(finalTopping);
             System.out.println("Added: " + finalTopping);
-
         }
 
         // Makes the sandwich and adds to order
