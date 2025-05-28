@@ -11,13 +11,12 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+
 
 // This class manages the flow of ordering
 public class OrderDataManager {
 
     // Holds the current order the user is making
-    private Scanner userinput = new Scanner(System.in);
     private Order currentOrder;
     private int orderId = 1;
 
