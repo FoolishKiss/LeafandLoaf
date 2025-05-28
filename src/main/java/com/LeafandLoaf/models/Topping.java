@@ -106,6 +106,7 @@ public class Topping {
             }
         }
 
+        // Returns the price of the alt meat and cheese
         return price;
     }
 

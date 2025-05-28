@@ -48,9 +48,6 @@ public class ReceiptWriter {
             // Thank you footer
             writer.write("Thank you for dining at Leaf & Loaf.");
 
-
-
-
           // If something happens catch the issue and print out error
         } catch (IOException e) {
             System.out.println("Failed to write receipt: " + e.getMessage());

@@ -32,11 +32,10 @@ public class OrderDataManager {
             System.out.println("\nWelcome to Leaf and Loaf\n");
             System.out.println("1) Start New Order");
             System.out.println("2) Exit");
-            System.out.println("Choose an option: \n");
+
 
             // Gets the users number input
-            int choice = userinput.nextInt();
-            userinput.nextLine(); // Eats new line
+            int choice = InputHelper.getInt("Choose an option: ");
 
             // Switch based off users input calls createNewOrder method or exit app
             switch (choice) {
@@ -70,11 +69,10 @@ public class OrderDataManager {
             System.out.println("4) View Order Receipt");
             System.out.println("5) Checkout");
             System.out.println("0 ) Cancel Order");
-            System.out.println("Choose an option: \n");
+
 
             // Gets the users number input
-            int input = userinput.nextInt();
-            userinput.nextLine(); // Eats new line
+            int input = InputHelper.getInt("Choose an option: ");
 
             switch (input) {
                 case 1:
@@ -270,17 +268,22 @@ public class OrderDataManager {
         System.out.println("0) Cancel");
 
         // Ask user to pick a chip
-        System.out.println("Enter chip number: ");
-        int chipChoice = userinput.nextInt();
-        userinput.nextLine();
+        int chipChoice = InputHelper.getInt("Enter chip number: ");
 
+        // Cancel if user enters 0
+        if (chipChoice == 0) {
+            System.out.println("Chip selection cancelled.");
+            return;
+        }
+
+        // Validate choice and get chip choice
         String chipType = (chipChoice >= 1 && chipChoice <= Chip.MENU.size())
                 // If the input is valid subtract 1 otherwise default to lemonade
-                ? Chip.MENU.get(chipChoice - 1) : "";
+                ? Chip.MENU.get(chipChoice - 1) : null;
 
         // If the input is invalid it prints out this message
-        if (chipChoice < 1 || chipChoice > Drink.MENU.size()) {
-            System.out.println("Invalid chip. No chips added");
+        if (chipType == null) {
+            System.out.println("Invalid choice. No chips added");
         }
 
         // Create and add chips to order
@@ -290,9 +293,6 @@ public class OrderDataManager {
         // Display drink and cost
         System.out.println("Chips added: " + chips);
         System.out.println("Price: $" + chips.getPrice());
-
-
-
     }
 
     //Method to check out

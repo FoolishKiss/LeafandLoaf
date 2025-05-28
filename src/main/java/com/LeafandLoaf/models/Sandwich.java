@@ -60,12 +60,10 @@ public class Sandwich {
             case TWELVE: basePrice = 8.50; break;
         }
 
-
-
         // Loops through toppings price and adds to base price
         for (Topping t: toppings) {
             double toppingPrice = t.getPrice(size);
-            basePrice += t.getPrice(size);
+            basePrice += toppingPrice;
         }
 
         // Returns final price of sandwich with toppings
