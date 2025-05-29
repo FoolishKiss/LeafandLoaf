@@ -110,9 +110,7 @@ public class Order {
         // Loops through each sandwich and prints out the formated line
         for (Sandwich s : sandwiches) {
             order.append("- Sandwich: ").append(s.toString()).append(" $").append(s.calculatePrice()).append("\n");
-            
         }
-
 
         // Loops through each drink and prints out the formated line
         for (Drink d : drinks) {
