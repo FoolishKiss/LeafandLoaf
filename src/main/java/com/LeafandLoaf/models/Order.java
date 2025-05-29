@@ -109,17 +109,19 @@ public class Order {
 
         // Loops through each sandwich and prints out the formated line
         for (Sandwich s : sandwiches) {
-            order.append("- Sandwich: ").append(s.toString()).append("\n");
+            order.append("- Sandwich: ").append(s.toString()).append(" $").append(s.calculatePrice()).append("\n");
+            
         }
+
 
         // Loops through each drink and prints out the formated line
         for (Drink d : drinks) {
-            order.append("- Drink: ").append(d.toString()).append("\n");
+            order.append("- Drink: ").append(d.toString()).append(" $").append(d.getPrice()).append("\n");
         }
 
         // Loops through each sandwich and prints out the formated line
         for (Chip c : chips) {
-            order.append("- Chip: ").append(c.toString()).append("\n");
+            order.append("- Chip: ").append(c.toString()).append(" $").append(c.getPrice()).append("\n");
         }
 
         // Prints out the total cost
