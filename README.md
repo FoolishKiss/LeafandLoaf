@@ -73,7 +73,6 @@ Welcome to Leaf & Loaf!
 
 Final Order Summary:
 - Sandwich: 8 inch on wheat sandwich (toasted)
-  - Toppings: Lettuce, Tomato, Vegan Cheese (Extra)
 - Drink: Large - Lemon Iced Tea
 - Chips: Pita Chips
 Total: $13.75
