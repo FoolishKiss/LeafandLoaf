@@ -41,8 +41,8 @@ public class OrderDataManager {
 
             // Switch based off users input calls createNewOrder method or exit app
             switch (choice) {
-                case 1: UIHelper.showSpinner(1); createNewOrder(); break;
-                case 2: UIHelper.success("Thank you. GoodBye!");
+                case 1: UIHelper.showSpinner(2); createNewOrder(); break;
+                case 2: UIHelper.showSpinner(2); UIHelper.success("Thank you. GoodBye!");
                     running = false; break;
                 // If user types anything besides 1 or 2 print message
                 default:
@@ -57,7 +57,7 @@ public class OrderDataManager {
     private void createNewOrder() {
 
         // Banner
-        UIHelper.banner("\nStarting a New Order\n");
+        UIHelper.typeText("\nStarting a New Order\n", 20);
 
 
         // Creates a new order
@@ -88,32 +88,33 @@ public class OrderDataManager {
 
             switch (input) {
                 case 1:
-                    UIHelper.typeText("Opening sandwich builder...", 20);
+                    UIHelper.typeText("\nOpening sandwich builder...", 20);
                     addSandwich();
                     break;
                 case 2:
-                    UIHelper.typeText("Adding a drink...", 20);
+                    UIHelper.typeText("\nAdding a drink...", 20);
                     addDrink();
                     break;
                 case 3:
-                    UIHelper.typeText("Adding chips...", 20);
+                    UIHelper.typeText("\nAdding chips...", 20);
                     addChips();
                     break;
                 case 4:
+                    UIHelper.showSpinner(1);
                     UIHelper.heading("Current Order Receipt");
                     System.out.println(currentOrder.summary());
                     break;
                 case 5:
-                    UIHelper.typeText("Checking out...", 20);
+                    UIHelper.typeText("\nChecking out...", 20);
                     checkout();
                     ordering = false;
                     break;
                 case 0:
-                    UIHelper.error("Order canceled.");
+                    UIHelper.error("\nOrder canceled.");
                     ordering = false;
                     break;
                 default:
-                    UIHelper.warning("Invalid option. Try again.");
+                    UIHelper.warning("\nInvalid option. Try again.");
             }
         }
     }
@@ -122,7 +123,7 @@ public class OrderDataManager {
     public void addSandwich() {
 
         // Lets user know that they started the sandwich process
-        UIHelper.heading("Building your sandwich...");
+        UIHelper.heading("Build your sandwich...");
 
 
         // Ask user for size choice

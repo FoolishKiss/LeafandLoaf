@@ -102,7 +102,6 @@ public class Order {
     public String summary(){
 
 
-
         // String builder to hold receipt
         StringBuilder order = new StringBuilder();
         order.append("Order Summary: \n");

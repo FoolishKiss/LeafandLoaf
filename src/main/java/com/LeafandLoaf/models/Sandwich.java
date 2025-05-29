@@ -63,10 +63,6 @@ public class Sandwich {
         // Loops through toppings price and adds to base price
         for (Topping t: toppings) {
             double toppingPrice = t.getPrice(size);
-
-            // For debugging logs the price of the topping
-            System.out.print("Added");
-            System.out.println("-" + t + " | Price: $" + toppingPrice);
             basePrice += toppingPrice;
 
         }

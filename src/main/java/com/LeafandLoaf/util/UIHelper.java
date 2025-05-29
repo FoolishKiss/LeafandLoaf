@@ -48,8 +48,8 @@ public class UIHelper {
         // Run until time is up
         while (System.currentTimeMillis() < endTime) {
 
-            // Display current frame
-            System.out.println("\r" + spinner[i++ % spinner.length] + " Preparing...");
+            // Display spinner by looping through list of spinner. \r moves cursor back
+            System.out.print("\r" + spinner[i++ % spinner.length] + " Preparing...");
             try {
                 // Delay between frames
                 Thread.sleep(150);
@@ -60,7 +60,7 @@ public class UIHelper {
             }
         }
         // Display done message
-        System.out.println("\rDone      \n");
+        UIHelper.warning("\rDone      \n");
     }
 
     // Method to print a divider line
@@ -74,13 +74,7 @@ public class UIHelper {
     public static void heading(String text) {
         System.out.println(BLUE + "\n=== " + text + "===\n" + RESET);
     }
-
-    // Method to center text
-    public static void centerText(String text) {
-        int width = 80;
-        int padding = (width - text.length()) / 2;
-        System.out.printf("%" + (padding + text.length()) + "s\n", text);
-    }
+    
 
     // Method to a color to a string
     public static void printColor(String message, String color) {
@@ -103,11 +97,5 @@ public class UIHelper {
     }
 
 
-    // Banner title message
-    public static void banner(String title) {
-        divider();
-        centerText(title);
-        divider();
-    }
 
 }
