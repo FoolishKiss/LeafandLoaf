@@ -1,3 +1,8 @@
+![LeafandLoafAppDiagram-Page- drawio](https://github.com/user-attachments/assets/019d47bc-4e15-407a-b5c3-8e4f977089f6)
+
+
+
+
 # 🥪 Leaf & Loaf - Deli Ordering CLI App
 
 Welcome to **Leaf & Loaf**, a console-based deli ordering system built in Java. Designed as a capstone project, this application offers a full-stack simulation of a real-world deli experience—all within a clean, modular CLI interface.
